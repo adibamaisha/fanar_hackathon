@@ -1,13 +1,11 @@
 import Head from "next/head";
+import Example from "./example";
 
 
 export default function Home() {
   return (
     <>
-      <Head>
-        
-        
-      </Head>
+<Example></Example>
      <p>
 THIS IS THE STARTING LOCATIONS
      </p>
