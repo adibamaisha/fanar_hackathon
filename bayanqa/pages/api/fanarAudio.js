@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     const response = await fetch("https://api.fanar.qa/v1/audio/voices", {
       method: "GET",
       headers: {
-        Authorization: `Bearer MA8qucrK2hMdzv1TtUtqKVesxG8750Fd`,
+        Authorization: `Bearer MA8qucrK2hMdzv1TtUtqKVesxG8750Fd`,  //http://localhost:3000/api/fanarAudio
       },
     });
 
