@@ -92,7 +92,7 @@ export default function Example() {
 
         <section className="core-features-section">
           <div className="section-header">
-            <span className="section-badge">CORE FEATURES</span>
+           
             <h2>Everything You Need, in One Place</h2>
           </div>
           <div className="feature-grid">
@@ -152,15 +152,28 @@ export default function Example() {
         }
 
         .hero-section {
-          max-width: 760px;
-          margin: 0 auto 3rem;
+          position: relative;
+          left: 50%;
+          right: 50%;
+          width: 100vw;
+          max-width: 100vw;
+          margin-left: -50vw;
+          margin-right: -50vw;
+          margin-bottom: 3rem;
           text-align: center;
+          padding: 5rem 1.5rem;
+          background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.4)), url('/main.png');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          color: #ffffff;
+          overflow: hidden;
         }
 
         .eyebrow {
           text-transform: uppercase;
           letter-spacing: 0.15em;
-          color: #2563eb;
+          color: #c7d2fe;
           font-weight: 700;
           margin-bottom: 1rem;
           font-size: 0.85rem;
@@ -170,15 +183,18 @@ export default function Example() {
           font-size: clamp(2.5rem, 4vw, 4rem);
           line-height: 1.05;
           margin: 0;
+          color: #ffffff;
+          text-shadow: 0 16px 32px rgba(15, 23, 42, 0.35);
         }
 
         .hero-text {
           margin-top: 1.25rem;
           font-size: 1.05rem;
-          color: #4b5563;
+          color: rgba(255, 255, 255, 0.88);
           max-width: 680px;
           margin-left: auto;
           margin-right: auto;
+          line-height: 1.8;
         }
 
         .section-header {
