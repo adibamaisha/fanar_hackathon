@@ -115,9 +115,7 @@ export default function Example() {
           <div className="section-header">
             <span className="section-badge">SERVICES</span>
             <h2>Find What You Need</h2>
-            <p className="section-description centered-description">
-              Choose a topic and jump straight to the service area that helps you move forward.
-            </p>
+           
           </div>
           <div className="quick-nav-grid">
             {quickNavItems.map((item) => {
@@ -144,7 +142,7 @@ export default function Example() {
 
       <style jsx>{`
         .page-shell {
-          padding: 3rem 1.5rem;
+          padding: 0 1.5rem 3rem;
           max-width: 1200px;
           margin: 0 auto;
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -159,13 +157,15 @@ export default function Example() {
           max-width: 100vw;
           margin-left: -50vw;
           margin-right: -50vw;
+          margin-top: 0;
           margin-bottom: 3rem;
           text-align: center;
           padding: 5rem 1.5rem;
-          background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.4)), url('/main.png');
+          background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.45)), url('/main.png');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          background-attachment: scroll;
           color: #ffffff;
           overflow: hidden;
         }
