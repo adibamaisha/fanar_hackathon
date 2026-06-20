@@ -2,6 +2,7 @@
 @import url('./business-startup.css');
 @import url('./document-validity.css');
 @import url('./footer.css');
+@import url('./violations-reports.css');
 
 :root {
   --background: #f8fafc;
