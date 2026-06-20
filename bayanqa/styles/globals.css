@@ -3,6 +3,7 @@
 @import url('./document-validity.css');
 @import url('./footer.css');
 @import url('./violations-reports.css');
+@import url('./navBar.css');
 
 :root {
   --background: #f8fafc;
