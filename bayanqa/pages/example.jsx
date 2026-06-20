@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, HeartPulse } from "lucide-react";
+import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight } from "lucide-react";
 
 const featureCards = [
   {
@@ -64,7 +64,7 @@ const quickNavItems = [
     title: "Healthcare & Insurance",
     description: "Register for health insurance, find approved providers, and access public healthcare services.",
     href: "/services/healthcare-insurance",
-    icon: HeartPulse,
+    icon: Building2,
   },
   {
     title: "Wills & Estate Planning",
@@ -113,7 +113,7 @@ export default function Example() {
 
         <section className="quick-nav-section section-spacing">
           <div className="section-header">
-            <span className="section-badge">QUICK NAVIGATION</span>
+            <span className="section-badge">SERVICES</span>
             <h2>Find What You Need</h2>
             <p className="section-description centered-description">
               Choose a topic and jump straight to the service area that helps you move forward.
@@ -123,14 +123,18 @@ export default function Example() {
             {quickNavItems.map((item) => {
               const Icon = item.icon;
               return (
-                <Link key={item.title} href={item.href} className="quick-nav-card">
-                  <div className="quick-nav-icon" aria-hidden="true">
-                    <Icon size={24} />
-                  </div>
-                  <div className="quick-nav-content">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
+                <Link key={item.title} href={item.href} legacyBehavior>
+                  <a className="quick-nav-card group" aria-label={`Open ${item.title}`}>
+                    <div className="quick-nav-icon" aria-hidden="true">
+                      <Icon size={35} />
+                    </div>
+                    <div className="quick-nav-content">
+                      <h3>{item.title}</h3>
+                    </div>
+                    <div className="quick-nav-arrow" aria-hidden="true">
+                      <ArrowRight size={20} strokeWidth={2} />
+                    </div>
+                  </a>
                 </Link>
               );
             })}
@@ -250,53 +254,130 @@ export default function Example() {
 
         .quick-nav-grid {
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 1.5rem;
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+          gap: 1.25rem;
         }
 
         .quick-nav-card {
-          display: block;
-          background: #eff6ff;
+          position: relative;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 0.3rem;
+          width: 100%;
+          background: #d9daf5;
+          border: 1px solid #c7d2fe;
           border-radius: 1.5rem;
-          padding: 1.5rem;
+          padding: 0.9rem;
           text-decoration: none;
           color: inherit;
-          transition: all 200ms ease;
+          transition: background 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+          box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+          cursor: pointer;
+          min-height: 60px;
+          align-items: start;
+          box-sizing: border-box;
         }
 
-        .quick-nav-card:hover {
-          box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
-          transform: translateY(-4px);
+        .quick-nav-card:hover,
+        .quick-nav-card:focus-visible {
+          background: #c7d2fe;
+          box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+          transform: translateY(-1px);
         }
 
         .quick-nav-icon {
-          width: 3rem;
-          height: 3rem;
+          width: 3.75rem;
+          height: 3.75rem;
           display: grid;
           place-items: center;
           border-radius: 9999px;
-          background: #2563eb;
+          background: #4f46e5;
+          color: #ffffff;
+          margin-bottom: 0.9rem;
+        }
+
+        .quick-nav-content {
+          min-width: 0;
+          display: grid;
+          gap: 0.45rem;
+        }
+
+        .quick-nav-arrow {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          display: grid;
+          place-items: center;
+          border-radius: 9999px;
+          background: #e0f2fe;
+          color: #4f46e5;
+          transition: transform 200ms ease;
+        }
+
+        .quick-nav-card:hover,
+        .quick-nav-card:focus-visible {
+          background: #c7d2fe;
+          box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+          transform: translateY(-1px);
+        }
+
+        .quick-nav-icon {
+          width: 3.75rem;
+          height: 3.75rem;
+          display: grid;
+          place-items: center;
+          border-radius: 9999px;
+          background: #4f46e5;
           color: #ffffff;
           margin-bottom: 1.25rem;
         }
 
+        .quick-nav-content {
+          min-width: 0;
+          display: grid;
+          gap: 0.5rem;
+        }
+
         .quick-nav-content h3 {
-          margin: 0 0 0.5rem;
-          font-size: 1.125rem;
+          margin: 0;
+          font-size: 1.28rem;
           font-weight: 700;
-          color: #1e3a8a;
+          color: #111827;
+          line-height: 1.3;
         }
 
         .quick-nav-content p {
           margin: 0;
-          color: #475569;
+          color: #4b5563;
           line-height: 1.75;
+          font-size: 0.95rem;
         }
 
-        @media (max-width: 900px) {
-          .feature-grid,
+        .quick-nav-arrow {
+          position: absolute;
+          bottom: 1.5rem;
+          right: 1.5rem;
+          display: grid;
+          place-items: center;
+          background: transparent;
+          color: #4f46e5;
+          transition: transform 200ms ease;
+        }
+
+        .quick-nav-card:hover .quick-nav-arrow,
+        .quick-nav-card:focus-visible .quick-nav-arrow {
+          transform: translateX(4px);
+        }
+
+        @media (min-width: 900px) {
+          .feature-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
           .quick-nav-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
           }
         }
       `}</style>
