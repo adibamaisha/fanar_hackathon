@@ -9,7 +9,7 @@ const cards = [
     title: 'After an Accident',
     desc: 'Step-by-step actions to take immediately, including police reporting and documentation requirements.',
     cta: 'Read the steps',
-    href: '#after-accident',
+    href: 'https://www.giggulf.qa/en/blog/what-to-do-after-a-car-accident-in-qatar-insurance-and-legal-steps',
   },
   {
     id: 'insurance',
@@ -18,7 +18,7 @@ const cards = [
     title: 'Insurance Claims',
     desc: 'How to file a claim, required documents, and what to expect from your insurer.',
     cta: 'File a claim',
-    href: '#insurance-claims',
+    href: '/services/claims',
   },
   {
     id: 'vehicle',
@@ -27,7 +27,7 @@ const cards = [
     title: 'Vehicle Services',
     desc: 'Registration, renewal, transfer of ownership, and other MOI vehicle procedures.',
     cta: 'Browse services',
-    href: '#vehicle-services',
+    href: 'https://portal.moi.gov.qa/wps/portal/MOIInternet/departmentcommittees/gatraffic/!ut/p/z1/tVNNc4IwFPwtPXjM5EEAwxFtK4LWtogfXJwIwcaagJixtr--0fHQS3U6HXN6mdm32bdvgzM8w5lie7FiWlSKbcx9nnmLJx8Cyx9BPBoHpnzoTdKuQ23wbTw9AfoBdUILrJiGQCFIxtG4M-raABbOLvdPcIazXOlav-H5Ry43YomE0rxRXCOuWrBjqOA1a7TkSueVlEJrzluw4oo3bMMKKZTY6eakuCpNUZYib0Fu-S5xjux1Lgo8Z17BObgeKplTIocUS-TnpI2YTUuvBJfarneeBn45AVybZnrNruwy_fSo10Ci8L4PJIG4N_CI8XMw7NrdFwDqngGXDL_2yNyIbP8QaUcOBOkwfuzEz2TkEpz81bW94B84VVUjTWQu0tOofVt695_00bUVmx8h1tttFpjYViaoB41nN8htCDjhapEmuJappORToPdXCuTg1vv117gM5RQFd9_SnnYD/?1dmy&urile=wcm%3Apath%3A%2Fwcmlib-internet-en%2Fsa-departmentcommittee%2Fgeneraladministrationoftraffic%2Flicensing%2Band%2Bregistration',
   },
 ];
 
