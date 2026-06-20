@@ -1,4 +1,4 @@
-import Example from "./example";
+import Example from "./homePage";
 
 export default function Home() {
   return <Example />;

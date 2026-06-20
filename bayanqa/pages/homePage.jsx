@@ -74,7 +74,7 @@ const quickNavItems = [
   },
 ];
 
-export default function Example() {
+export default function HomePage() {
   return (
     <>
       <Head>
