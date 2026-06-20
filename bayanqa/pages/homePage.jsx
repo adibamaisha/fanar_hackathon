@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, HeartPulse, ArrowRight } from "lucide-react";
 
 const featureCards = [
@@ -75,6 +76,16 @@ const quickNavItems = [
 ];
 
 export default function HomePage() {
+  const heroImages = ["/hg1.png", "/hg2.png", "/hg3.png", "/hg4.png"];
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlideIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   return (
     <>
       <Head>
@@ -83,11 +94,33 @@ export default function HomePage() {
 
       <main className="page-shell">
         <section className="hero-section">
-         
-          <h1>Fast, clear government guidance in Arabic and English</h1>
-          <p className="hero-text">
-            Navigate procedures, documents, and public services with confidence using a single platform built for your everyday needs.
-          </p>
+          <div className="hero-slides">
+            {heroImages.map((src, index) => (
+              <div
+                key={src}
+                className={`hero-slide ${index === slideIndex ? "active" : ""}`}
+                style={{ backgroundImage: `linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.45)), url('${src}')` }}
+              />
+            ))}
+          </div>
+
+          <div className="hero-copy">
+           
+            <h1>Fast, clear government guidance in Arabic and English</h1>
+            <p className="hero-text">
+              Navigate procedures, documents, and public services with confidence using a single platform built for your everyday needs.
+            </p>
+            <div className="hero-indicators">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  className={`hero-indicator ${index === slideIndex ? "active" : ""}`}
+                  onClick={() => setSlideIndex(index)}
+                  aria-label={`Show slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="core-features-section">
@@ -164,15 +197,78 @@ export default function HomePage() {
           margin-right: -50vw;
           margin-top: 0;
           margin-bottom: 3rem;
-          text-align: center;
-          padding: 5rem 1.5rem;
-          background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.45)), url('/main.png');
+          min-height: 520px;
+          overflow: hidden;
+        }
+
+        .hero-slides {
+          position: absolute;
+          inset: 0;
+          height: 100%;
+        }
+
+        .hero-slide {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transform: translateX(20px);
+          transition: opacity 0.8s ease, transform 0.8s ease;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
-          background-attachment: scroll;
-          color: #ffffff;
-          overflow: hidden;
+          z-index: 0;
+        }
+
+        .hero-slide.active {
+          opacity: 1;
+          transform: translateX(0);
+          z-index: 1;
+        }
+
+        .hero-slide::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.45));
+        }
+
+        .hero-copy {
+          position: absolute;
+          inset: 0;
+          display: grid;
+          place-items: center;
+          padding: 5rem 1.5rem;
+          text-align: center;
+          z-index: 1;
+          pointer-events: auto;
+        }
+
+        .hero-copy > * {
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero-indicators {
+          display: flex;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 1.75rem;
+          pointer-events: auto;
+        }
+
+        .hero-indicator {
+          width: 0.9rem;
+          height: 0.9rem;
+          border-radius: 9999px;
+          border: 1px solid rgba(255, 255, 255, 0.85);
+          background: transparent;
+          cursor: pointer;
+          transition: transform 200ms ease, background-color 200ms ease;
+        }
+
+        .hero-indicator.active {
+          background: #ffffff;
+          transform: scale(1.1);
         }
 
         .eyebrow {
