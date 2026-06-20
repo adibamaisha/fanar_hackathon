@@ -83,7 +83,7 @@ export default function HomePage() {
 
       <main className="page-shell">
         <section className="hero-section">
-          <p className="eyebrow">Bayan QA</p>
+         
           <h1>Fast, clear government guidance in Arabic and English</h1>
           <p className="hero-text">
             Navigate procedures, documents, and public services with confidence using a single platform built for your everyday needs.
