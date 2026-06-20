@@ -1,0 +1,259 @@
+/* business-startup.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ─── Layout ─── */
+.bss-section {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  min-height: 100vh;
+  padding: 64px 48px 80px;
+  box-sizing: border-box;
+}
+
+.bss-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.bss-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: #0f0f1a;
+  letter-spacing: -0.02em;
+  margin: 0 0 40px;
+  line-height: 1.15;
+}
+
+/* ─── Two-column body ─── */
+.bss-body {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ─── Left column ─── */
+.bss-left {}
+
+.bss-intro {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin: 0 0 36px;
+  max-width: 560px;
+}
+
+/* ─── Steps ─── */
+.bss-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bss-step {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 20px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.18s ease;
+  position: relative;
+}
+
+.bss-step:hover {
+  background: #f0f0ff;
+  transform: translateX(6px);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.1);
+}
+
+.bss-step:active {
+  transform: translateX(3px) scale(0.98);
+  box-shadow: none;
+}
+
+.bss-step-arrow {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #ede9fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.bss-step:hover .bss-step-arrow {
+  background: #4f46e5;
+}
+
+.bss-step:hover .bss-step-arrow svg path {
+  stroke: #ffffff;
+}
+
+.bss-step-arrow svg path {
+  stroke: #4f46e5;
+  transition: stroke 0.18s ease;
+}
+
+.bss-step-content {}
+
+.bss-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f0f1a;
+  margin: 0 0 6px;
+}
+
+.bss-step-desc {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* divider between steps */
+.bss-step + .bss-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 54px;
+  right: 16px;
+  height: 1px;
+  background: #f0f0f5;
+}
+
+/* ─── Right panel ─── */
+.bss-panel {
+  background: #f3f4f6;
+  border-radius: 18px;
+  padding: 28px 28px 32px;
+}
+
+.bss-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.bss-panel-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.bss-panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f0f1a;
+  margin: 0;
+}
+
+/* ─── Quick links list ─── */
+.bss-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bss-link-item a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: #1f2937;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bss-link-item a::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9ca3af;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.bss-link-item a:hover {
+  background: #ffffff;
+  color: #4f46e5;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
+}
+
+.bss-link-item a:hover::before {
+  background: #4f46e5;
+  transform: scale(1.4);
+}
+
+.bss-link-item a:active {
+  transform: translateX(2px) scale(0.97);
+}
+
+/* ─── Start Guide button ─── */
+.bss-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  padding: 13px 24px;
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+  letter-spacing: 0.01em;
+  box-sizing: border-box;
+}
+
+.bss-btn:hover {
+  background: #4338ca;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+  transform: translateY(-2px);
+}
+
+.bss-btn:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .bss-section {
+    padding: 40px 20px 60px;
+  }
+
+  .bss-body {
+    grid-template-columns: 1fr;
+  }
+
+  .bss-panel {
+    order: -1;
+  }
+}
