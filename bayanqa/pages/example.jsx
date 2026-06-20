@@ -1,17 +1,305 @@
-import React from 'react'
+import Head from "next/head";
+import Link from "next/link";
+import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, HeartPulse } from "lucide-react";
 
-export default function 
+const featureCards = [
+  {
+    icon: Bot,
+    title: "AI Assistant",
+    description:
+      "Ask questions in plain Arabic or English and receive clear, step-by-step guidance tailored to your situation. No jargon, no confusion.",
+  },
+  {
+    icon: Zap,
+    title: "Instant Translation",
+    description:
+      "All guides and chatbot responses are available in both Arabic and English. Toggle languages instantly — no separate searches needed.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Service Guides",
+    description:
+      "Easy-to-follow instructions for every government procedure, including required documents, relevant offices, and links to official portals.",
+  },
+];
 
+const quickNavItems = [
+  {
+    title: "Traffic & Accidents",
+    description: "Get help with fines, reports, insurance claims, and accident procedures.",
+    href: "/services/traffic-accidents",
+    icon: Car,
+  },
+  {
+    title: "Business & Startups",
+    description: "Register your company, navigate licenses, and launch your new venture with confidence.",
+    href: "/services/business-startup",
+    icon: Briefcase,
+  },
+  {
+    title: "Violations & Reports",
+    description: "Report issues, appeal violations, or learn how to handle government complaints properly.",
+    href: "/services/violations-reports",
+    icon: MessageCircleWarning,
+  },
+  {
+    title: "Document Renewals",
+    description: "Renew passports, IDs, residency documents, and other essential papers without the guesswork.",
+    href: "/services/document-renewals",
+    icon: IdCard,
+  },
+  {
+    title: "Student Banking",
+    description: "Open accounts, access student benefits, and understand banking options for students.",
+    href: "/services/student-banking",
+    icon: PiggyBank,
+  },
+  {
+    title: "AI Virtual Advisor",
+    description: "Ask the virtual advisor for tailored guidance across services and procedures.",
+    href: "/services/ai-advisor",
+    icon: Bot,
+  },
+  {
+    title: "Healthcare & Insurance",
+    description: "Register for health insurance, find approved providers, and access public healthcare services.",
+    href: "/services/healthcare-insurance",
+    icon: HeartPulse,
+  },
+  {
+    title: "Wills & Estate Planning",
+    description: "Prepare a will, protect your assets, and ensure your bank accounts are properly managed.",
+    href: "/services/wills-estate",
+    icon: FileText,
+  },
+];
 
-() {
+export default function Example() {
   return (
-    <div>
+    <>
+      <Head>
+        <title>Bayan QA</title>
+      </Head>
 
-<p>
-HELLOOOOO THIS IS EXAMPLE
+      <main className="page-shell">
+        <section className="hero-section">
+          <p className="eyebrow">Bayan QA</p>
+          <h1>Fast, clear government guidance in Arabic and English</h1>
+          <p className="hero-text">
+            Navigate procedures, documents, and public services with confidence using a single platform built for your everyday needs.
+          </p>
+        </section>
 
-</p>
-        
-    </div>
-  )
+        <section className="core-features-section">
+          <div className="section-header">
+            <span className="section-badge">CORE FEATURES</span>
+            <h2>Everything You Need, in One Place</h2>
+          </div>
+          <div className="feature-grid">
+            {featureCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <article key={card.title} className="feature-card">
+                  <div className="feature-icon">
+                    <Icon size={24} />
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="quick-nav-section section-spacing">
+          <div className="section-header">
+            <span className="section-badge">QUICK NAVIGATION</span>
+            <h2>Find What You Need</h2>
+            <p className="section-description centered-description">
+              Choose a topic and jump straight to the service area that helps you move forward.
+            </p>
+          </div>
+          <div className="quick-nav-grid">
+            {quickNavItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link key={item.title} href={item.href} className="quick-nav-card">
+                  <div className="quick-nav-icon" aria-hidden="true">
+                    <Icon size={24} />
+                  </div>
+                  <div className="quick-nav-content">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      </main>
+
+      <style jsx>{`
+        .page-shell {
+          padding: 3rem 1.5rem;
+          max-width: 1200px;
+          margin: 0 auto;
+          font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          color: #111827;
+        }
+
+        .hero-section {
+          max-width: 760px;
+          margin: 0 auto 3rem;
+          text-align: center;
+        }
+
+        .eyebrow {
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: #2563eb;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          font-size: 0.85rem;
+        }
+
+        .hero-section h1 {
+          font-size: clamp(2.5rem, 4vw, 4rem);
+          line-height: 1.05;
+          margin: 0;
+        }
+
+        .hero-text {
+          margin-top: 1.25rem;
+          font-size: 1.05rem;
+          color: #4b5563;
+          max-width: 680px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .section-header {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .section-badge {
+          display: inline-flex;
+          padding: 0.45rem 0.8rem;
+          border-radius: 9999px;
+          background: rgba(37, 99, 235, 0.12);
+          color: #1d4ed8;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+        }
+
+        .core-features-section h2,
+        .quick-nav-section h2 {
+          font-size: 2rem;
+          margin: 0;
+        }
+
+        .feature-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1.25rem;
+        }
+
+        .feature-card {
+          display: grid;
+          gap: 1rem;
+          padding: 1.25rem 0;
+        }
+
+        .feature-icon {
+          width: 2.75rem;
+          height: 2.75rem;
+          display: grid;
+          place-items: center;
+          border-radius: 0.85rem;
+          background: rgba(59, 130, 246, 0.12);
+          color: #1d4ed8;
+        }
+
+        .feature-card h3 {
+          margin: 0;
+          font-size: 1.125rem;
+        }
+
+        .feature-card p {
+          margin: 0;
+          color: #4b5563;
+          line-height: 1.8;
+        }
+
+        .quick-nav-section {
+          margin-top: 4rem;
+        }
+
+        .section-spacing {
+          padding: 5rem 0;
+        }
+
+        .section-description {
+          color: #6b7280;
+          max-width: 40rem;
+          margin: 0 auto;
+        }
+
+        .quick-nav-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1.5rem;
+        }
+
+        .quick-nav-card {
+          display: block;
+          background: #eff6ff;
+          border-radius: 1.5rem;
+          padding: 1.5rem;
+          text-decoration: none;
+          color: inherit;
+          transition: all 200ms ease;
+        }
+
+        .quick-nav-card:hover {
+          box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+          transform: translateY(-4px);
+        }
+
+        .quick-nav-icon {
+          width: 3rem;
+          height: 3rem;
+          display: grid;
+          place-items: center;
+          border-radius: 9999px;
+          background: #2563eb;
+          color: #ffffff;
+          margin-bottom: 1.25rem;
+        }
+
+        .quick-nav-content h3 {
+          margin: 0 0 0.5rem;
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: #1e3a8a;
+        }
+
+        .quick-nav-content p {
+          margin: 0;
+          color: #475569;
+          line-height: 1.75;
+        }
+
+        @media (max-width: 900px) {
+          .feature-grid,
+          .quick-nav-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+    </>
+  );
 }
