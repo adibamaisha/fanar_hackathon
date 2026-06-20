@@ -105,13 +105,18 @@ export default function HomePage() {
                   </div>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
+                  {card.title === "Service Guides" && (
+                    <a href="#services" className="feature-card-link">
+                      See services →
+                    </a>
+                  )}
                 </article>
               );
             })}
           </div>
         </section>
 
-        <section className="quick-nav-section section-spacing">
+        <section className="quick-nav-section section-spacing" id="services">
           <div className="section-header">
             <span className="section-badge">SERVICES</span>
             <h2>Find What You Need</h2>
@@ -252,6 +257,21 @@ export default function HomePage() {
           margin: 0;
           color: #4b5563;
           line-height: 1.8;
+        }
+
+        .feature-card-link {
+          display: inline-block;
+          margin-top: 1rem;
+          color: #2563eb;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-decoration: none;
+          transition: color 200ms ease;
+        }
+
+        .feature-card-link:hover {
+          color: #1d4ed8;
+          text-decoration: underline;
         }
 
         .quick-nav-section {
