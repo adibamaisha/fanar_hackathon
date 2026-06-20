@@ -25,9 +25,9 @@ const steps = [
 
 const quickLinks = [
   { label: 'MOCI Business Portal', href: 'https://www.moci.gov.qa' },
-  { label: 'Commercial Registration', href: 'https://www.moci.gov.qa/en/services/commercial-registration' },
+  { label: 'Commercial Registration', href: 'https://www.moci.gov.qa/en/about-the-ministry/departments/departments-under-the-assistant-deputy-of-commerce-affairs/the-commercial-registration-and-licenses-department/' },
   { label: 'Invest Qatar', href: 'https://invest.qa/en' },
-  { label: 'Free Zone Options', href: 'https://qfza.qa' },
+  { label: 'Free Zone Options', href: 'https://qfz.gov.qa/' },
 ];
 
 // Inline arrow SVG
@@ -55,7 +55,7 @@ export default function BusinessStartupSetup() {
           <div className="bss-left">
             <p className="bss-intro">
               Starting a business in Qatar doesn't have to be complicated. Get
-              clear guidance on licenses, permits, and government requirements —
+              clear guidance on licenses, permits, and government requirements -
               whether you're a local entrepreneur or an investor.
             </p>
 
