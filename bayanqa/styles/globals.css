@@ -5,6 +5,8 @@
 @import url('./violations-reports.css');
 @import url('./navBar.css');
 @import url('./claims.css');
+@import url('./AiAgentWidget.css');
+
 
 :root {
   --background: #f8fafc;
