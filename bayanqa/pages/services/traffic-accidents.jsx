@@ -50,6 +50,8 @@ export default function AccidentVehicleProcedures() {
           <a
             key={card.id}
             href={card.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`avp-card ${card.modifier}`}
             aria-label={card.title}
           >
