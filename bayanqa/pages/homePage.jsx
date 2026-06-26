@@ -1,15 +1,18 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight, BarChart3 } from "lucide-react";
+import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight, ArrowLeft, BarChart3 } from "lucide-react";
 import { useChat } from "@/context/ChatContext";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function HomePage() {
   const { setIsChatOpen } = useChat();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isArabic = language === "Arabic";
   const heroImages = ["/hg1.png", "/hg2.png", "/hg3.png", "/hg4.png"];
   const [slideIndex, setSlideIndex] = useState(0);
+  const ctaArrow = isArabic ? "←" : "→";
+  const QuickNavArrowIcon = isArabic ? ArrowLeft : ArrowRight;
 
   // ← moved inside component so t() is in scope
   const featureCards = [
@@ -110,17 +113,17 @@ export default function HomePage() {
                       event.preventDefault();
                       setIsChatOpen(true);
                     }}>
-                      {card.cta} →
+                      {card.cta} {ctaArrow}
                     </a>
                   )}
                   {card.ctaType === "scroll" && (
                     <a href="#services" className="feature-card-link">
-                      {card.cta} →
+                      {card.cta} {ctaArrow}
                     </a>
                   )}
                   {card.ctaType === "link" && (
                     <a href={card.href} className="feature-card-link">
-                      {card.cta} →
+                      {card.cta} {ctaArrow}
                     </a>
                   )}
                 </article>
@@ -152,8 +155,8 @@ export default function HomePage() {
                     <div className="quick-nav-content">
                       <h3>{item.title}</h3>
                     </div>
-                    <div className="quick-nav-arrow" aria-hidden="true">
-                      <ArrowRight size={20} strokeWidth={2} />
+                    <div className={`quick-nav-arrow ${isArabic ? "rtl" : ""}`} aria-hidden="true">
+                      <QuickNavArrowIcon className="quick-nav-arrow-icon" size={21} strokeWidth={2} />
                     </div>
                   </div>
                 );
@@ -168,8 +171,8 @@ export default function HomePage() {
                     <div className="quick-nav-content">
                       <h3>{item.title}</h3>
                     </div>
-                    <div className="quick-nav-arrow" aria-hidden="true">
-                      <ArrowRight size={20} strokeWidth={2} />
+                    <div className={`quick-nav-arrow ${isArabic ? "rtl" : ""}`} aria-hidden="true">
+                      <QuickNavArrowIcon className="quick-nav-arrow-icon" size={21} strokeWidth={2} />
                     </div>
                   </a>
                 </Link>
@@ -470,9 +473,24 @@ export default function HomePage() {
           transition: transform 200ms ease;
         }
 
+        .quick-nav-arrow-icon {
+          transform: scaleX(1.15);
+          transform-origin: center;
+        }
+
+        .quick-nav-arrow.rtl {
+          right: auto;
+          left: 1.5rem;
+        }
+
         .quick-nav-card:hover .quick-nav-arrow,
         .quick-nav-card:focus-visible .quick-nav-arrow {
           transform: translateX(4px);
+        }
+
+        .quick-nav-card:hover .quick-nav-arrow.rtl,
+        .quick-nav-card:focus-visible .quick-nav-arrow.rtl {
+          transform: translateX(-4px);
         }
 
         @media (min-width: 900px) {

@@ -335,7 +335,7 @@ export default function Navbar() {
       <header className="site-navbar">
         <div className="site-navbar-inner">
           <Link href="/" className="site-logo-link">
-            <Image src="/logo.png" alt="Bayan QA" width={100} height={120} priority style={{ height: 120, width: "auto" }} />
+            <Image src="/logo.png" alt="Bayan QA" width={100} height={120} unoptimized priority style={{ height: 120, width: "auto" }} />
           </Link>
 
           <div className="navbar-controls">
