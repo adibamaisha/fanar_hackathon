@@ -13,7 +13,7 @@ export default function Footer() {
   ];
 
   const trustedSources = [
-    { label: 'Hukoomi',                   href: 'https://hukoomi.gov.qa' },
+    { label: t('Hukoomi'),                   href: 'https://hukoomi.gov.qa' },
     { label: t('Ministry of Interior'),   href: 'https://portal.moi.gov.qa' },
     { label: t('Ministry of Justice'),    href: 'https://www.moj.gov.qa' },
     { label: t('Ministry of Public Health'), href: 'https://www.moph.gov.qa' },

@@ -37,11 +37,11 @@ export const UI_STRINGS = {
 "Everything You Need, in One Place": true,
 "AI Assistant": true,
 "Ask questions in plain Arabic or English and receive clear, step-by-step guidance tailored to your situation. No jargon, no confusion.": true,
-"Instant Translation": true,
-"All guides and chatbot responses are available in both Arabic and English. Toggle languages instantly — no separate searches needed.": true,
 "Service Guides": true,
 "Easy-to-follow instructions for every government procedure, including required documents, relevant offices, and links to official portals.": true,
 "See services →": true,
+"Citizen Feedback": true,
+"View live analytics on what citizens ask about and how satisfied they are.":true,
 
 // Services section
 "SERVICES": true,
@@ -65,6 +65,7 @@ export const UI_STRINGS = {
 "About": true,
 "Contact": true,
 "Trusted Sources": true,
+"Hukoomi": true,
 "Ministry of Interior": true,
 "Ministry of Justice": true,
 "Ministry of Public Health": true,
