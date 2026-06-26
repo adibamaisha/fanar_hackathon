@@ -2,5 +2,9 @@
   {
     "service": "Document",
     "rating": 3
+  },
+  {
+    "service": "Banking",
+    "rating": 3
   }
 ]

@@ -96,7 +96,7 @@ export default function HomePage() {
 
         <section className="core-features-section">
           <div className="section-header">
-            <h2>{t("Everything You Need, in One Place")}</h2>
+            <h2>{t("Everything You Need in One Place")}</h2>
           </div>
           <div className="feature-grid">
             {featureCards.map((card) => {

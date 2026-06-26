@@ -2,5 +2,9 @@
   {
     "service": "Document",
     "helpful": true
+  },
+  {
+    "service": "Banking",
+    "helpful": true
   }
 ]
