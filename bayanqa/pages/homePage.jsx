@@ -1,9 +1,8 @@
-
-
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight } from "lucide-react";
+import { useChat } from "@/context/ChatContext";
 
 const featureCards = [
   {
@@ -60,7 +59,7 @@ const quickNavItems = [
   {
     title: "AI Virtual Advisor",
     description: "Ask the virtual advisor for tailored guidance across services and procedures.",
-    href: "/services/ai-advisor",
+    href: null, // ← no href, handled with onClick
     icon: Bot,
   },
   {
@@ -78,6 +77,7 @@ const quickNavItems = [
 ];
 
 export default function HomePage() {
+  const { setIsChatOpen } = useChat(); // ← inside the component
   const heroImages = ["/hg1.png", "/hg2.png", "/hg3.png", "/hg4.png"];
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -157,6 +157,30 @@ export default function HomePage() {
           <div className="quick-nav-grid">
             {quickNavItems.map((item) => {
               const Icon = item.icon;
+
+              // ← AI Virtual Advisor uses onClick instead of Link
+              if (item.title === "AI Virtual Advisor") {
+                return (
+                  <div
+                    key={item.title}
+                    className="quick-nav-card"
+                    onClick={() => setIsChatOpen(true)}
+                    aria-label="Open AI Virtual Advisor"
+                  >
+                    <div className="quick-nav-icon" aria-hidden="true">
+                      <Icon size={35} />
+                    </div>
+                    <div className="quick-nav-content">
+                      <h3>{item.title}</h3>
+                    </div>
+                    <div className="quick-nav-arrow" aria-hidden="true">
+                      <ArrowRight size={20} strokeWidth={2} />
+                    </div>
+                  </div>
+                );
+              }
+
+              // ← all other cards stay as Link
               return (
                 <Link key={item.title} href={item.href} legacyBehavior>
                   <a className="quick-nav-card group" aria-label={`Open ${item.title}`}>
