@@ -3,89 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight, BarChart3 } from "lucide-react";
 import { useChat } from "@/context/ChatContext";
-<<<<<<< Updated upstream
-
-const featureCards = [
-  {
-    icon: Bot,
-    title: "AI Assistant",
-    description:
-      "Ask plain-language questions and get quick guidance from the Bayan QA assistant.",
-    cta: "See Assistant",
-    ctaType: "chat",
-  },
-  {
-    icon: ClipboardList,
-    title: "Service Guides",
-    description:
-      "Browse step-by-step guides for the most common government services.",
-    cta: "See Services",
-    ctaType: "scroll",
-  },
-  {
-    icon: BarChart3,
-    title: "Citizen Feedback",
-    description:
-      "View live analytics on what citizens ask about and how satisfied they are.",
-    cta: "See Analytics",
-    ctaType: "link",
-    href: "/citizen-feedback",
-  },
-];
-
-const quickNavItems = [
-  {
-    title: "Traffic & Accidents",
-    description: "Get help with fines, reports, insurance claims, and accident procedures.",
-    href: "/services/traffic-accidents",
-    icon: Car,
-  },
-  {
-    title: "Business & Startups",
-    description: "Register your company, navigate licenses, and launch your new venture with confidence.",
-    href: "/services/business-startup",
-    icon: Briefcase,
-  },
-  {
-    title: "Violations & Reports",
-    description: "Report issues, appeal violations, or learn how to handle government complaints properly.",
-    href: "/services/violations-reports",
-    icon: MessageCircleWarning,
-  },
-  {
-    title: "Document Renewals",
-    description: "Renew passports, IDs, residency documents, and other essential papers without the guesswork.",
-    href: "/services/document-renewals",
-    icon: IdCard,
-  },
-  {
-    title: "Student Banking",
-    description: "Open accounts, access student benefits, and understand banking options for students.",
-    href: "/services/student-banking",
-    icon: PiggyBank,
-  },
-  {
-    title: "AI Virtual Advisor",
-    description: "Ask the virtual advisor for tailored guidance across services and procedures.",
-    href: null, // ← no href, handled with onClick
-    icon: Bot,
-  },
-  {
-    title: "Healthcare & Insurance",
-    description: "Register for health insurance, find approved providers, and access public healthcare services.",
-    href: "/services/healthcare-insurance",
-    icon: Building2,
-  },
-  {
-    title: "Wills & Estate Planning",
-    description: "Prepare a will, protect your assets, and ensure your bank accounts are properly managed.",
-    href: "/services/wills-estate",
-    icon: FileText,
-  },
-];
-=======
 import { useLanguage } from "@/context/LanguageContext";
->>>>>>> Stashed changes
 
 export default function HomePage() {
   const { setIsChatOpen } = useChat();
@@ -99,16 +17,23 @@ export default function HomePage() {
       icon: Bot,
       title: t("AI Assistant"),
       description: t("Ask questions in plain Arabic or English and receive clear, step-by-step guidance tailored to your situation. No jargon, no confusion."),
+      cta: t("See Assistant"),
+      ctaType: "chat",
     },
-    {
-      icon: Zap,
-      title: t("Instant Translation"),
-      description: t("All guides and chatbot responses are available in both Arabic and English. Toggle languages instantly — no separate searches needed."),
-    },
-    {
+     {
       icon: ClipboardList,
       title: t("Service Guides"),
       description: t("Easy-to-follow instructions for every government procedure, including required documents, relevant offices, and links to official portals."),
+      cta: t("See Services"),
+      ctaType: "scroll",
+    },
+    {
+      icon: BarChart3,
+      title: t("Citizen Feedback"),
+      description: t("View live analytics on what citizens ask about and how satisfied they are."),
+      cta: t("See Analytics"),
+      ctaType: "link",
+      href: "/citizen-feedback",
     },
   ];
 
@@ -180,11 +105,6 @@ export default function HomePage() {
                   </div>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
-<<<<<<< Updated upstream
-                  {card.title === t("Service Guides") && (
-                    <a href="#services" className="feature-card-link">
-                      {t("See services →")}
-=======
                   {card.ctaType === "chat" && (
                     <a href="#" className="feature-card-link" onClick={(event) => {
                       event.preventDefault();
@@ -201,7 +121,6 @@ export default function HomePage() {
                   {card.ctaType === "link" && (
                     <a href={card.href} className="feature-card-link">
                       {card.cta} →
->>>>>>> Stashed changes
                     </a>
                   )}
                 </article>
