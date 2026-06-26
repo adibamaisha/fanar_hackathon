@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import { Globe, ChevronDown, Search, X, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Bot, Building2, FileText } from "lucide-react";
-
+import { useChat } from "@/context/ChatContext"; 
 
 const searchItems = [
   { title: "Traffic & Accidents", description: "Fines, reports, insurance claims, and accident procedures.", href: "/services/traffic-accidents", icon: Car },
@@ -10,12 +10,13 @@ const searchItems = [
   { title: "Violations & Reports", description: "Report issues, appeal violations, or handle government complaints.", href: "/services/violations-reports", icon: MessageCircleWarning },
   { title: "Document Renewals", description: "Renew passports, IDs, residency documents, and essential papers.", href: "/services/document-renewals", icon: IdCard },
   { title: "Student Banking", description: "Open accounts, access student benefits, and banking options.", href: "/services/student-banking", icon: PiggyBank },
-  { title: "AI Virtual Advisor", description: "Tailored guidance across services and procedures.", href: "/services/ai-advisor", icon: Bot },
+  { title: "AI Virtual Advisor", description: "Tailored guidance across services and procedures.", href: null, icon: Bot }, // ← href is now null
   { title: "Healthcare & Insurance", description: "Register for health insurance and access public healthcare.", href: "/services/healthcare-insurance", icon: Building2 },
   { title: "Wills & Estate Planning", description: "Prepare a will, protect assets, and manage bank accounts.", href: "/services/wills-estate", icon: FileText },
 ];
 
 export default function Navbar() {
+  const { setIsChatOpen } = useChat(); // ← add this
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [language, setLanguage] = useState("English");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -189,6 +190,32 @@ export default function Navbar() {
                     titleNode = item.title;
                   }
 
+                  // ← AI Virtual Advisor opens chat instead of navigating
+                  if (item.title === "AI Virtual Advisor") {
+                    return (
+                      <li key="ai-advisor">
+                        <button
+                          className="search-result-item"
+                          onClick={() => {
+                            setSearchOpen(false);
+                            setIsChatOpen(true);
+                          }}
+                          style={{ width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer" }}
+                        >
+                          <div className="search-result-icon">
+                            <Icon size={20} />
+                          </div>
+                          <div className="search-result-text">
+                            <span className="search-result-title">{titleNode}</span>
+                            <span className="search-result-desc">{item.description}</span>
+                          </div>
+                          <span className="search-result-arrow">→</span>
+                        </button>
+                      </li>
+                    );
+                  }
+
+                  // ← all other items stay as Link
                   return (
                     <li key={item.href}>
                       <Link
