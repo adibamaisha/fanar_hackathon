@@ -25,7 +25,7 @@ const banks = [
       "Student ID card",
       "Recent utility bill or residence proof",
     ],
-    applyUrl: "https://www.cbq.qa/EN/Personal/Accounts/Pages/Savings-Accounts.aspx",
+    applyUrl: "https://www.cbq.com.qa/en/personal/accounts/commercial-bank-student-programme",
   },
   {
     id: "qib",
@@ -33,7 +33,7 @@ const banks = [
     name: "QIB",
     fullName: "Qatar Islamic Bank",
     type: "Islamic (Shariah-compliant)",
-    accountName: "QIB Youth / Student Account",
+    accountName: "QIB Bedaya Account",
     tagline: "Qatar's leading Islamic bank — 100% Shariah-compliant with dedicated student offerings.",
     features: [
       "Shariah-compliant savings (no interest)",
@@ -43,12 +43,13 @@ const banks = [
       "Youth-specific promotions & rewards",
     ],
     documents: [
-      "Valid Qatar ID or Passport",
-      "Enrollment letter from college / university",
-      "Student ID card",
-      "Completed QIB account application",
+      "Age: 18-25 years old only",
+      "Student ID",
+      "Valid Qatar ID (For Qataris & Expats)",
+      "Passport (For Expats)",
+      "Income/Salary document proof",
     ],
-    applyUrl: "https://www.qib.com.qa/en/personal/accounts",
+    applyUrl: "https://www.qib.com.qa/en/personal/accounts/bedaya-account/",
   },
   {
     id: "qnb",
@@ -71,7 +72,7 @@ const banks = [
       "Recent proof of address",
       "Passport-size photograph",
     ],
-    applyUrl: "https://www.qnb.com/sites/qnb/qnbqatar/page/en/enpersonalaccounts.html",
+    applyUrl: "https://www.qnb.com/sites/qnb/qnbindia/page/en/enbasicaccount.html",
   },
 ];
 
