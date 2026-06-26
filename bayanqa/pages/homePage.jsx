@@ -1,8 +1,13 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight } from "lucide-react";
 import { useChat } from "@/context/ChatContext";
+
+const CitizenInsightsDashboard = dynamic(() => import("@/components/CitizenInsightsDashboard"), {
+  ssr: false,
+});
 
 const featureCards = [
   {
@@ -199,6 +204,8 @@ export default function HomePage() {
             })}
           </div>
         </section>
+
+        <CitizenInsightsDashboard />
       </main>
 
       <style jsx>{`

@@ -102,10 +102,11 @@
 
 .ai-message {
   display: flex;
+  flex-direction: column;
   max-width: 95%;      /* ← more width for content */
 }
 
-.ai-message p {
+.ai-bubble {
   margin: 0;
   padding: 0.75rem 1rem;
   border-radius: 1rem;
@@ -114,61 +115,100 @@
 }
 
 .ai-message-bot {
-  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;         /* ← bot messages use full width */
 }
 
-/* ← bot bubble wraps content properly */
-.ai-message-bot > div {
+.ai-bubble-bot {
   background: #f3f4f6;
   color: #111827;
   border-radius: 0.25rem 1rem 1rem 1rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.88rem;
-  line-height: 1.6;
   width: 100%;
   box-sizing: border-box;
 }
 
-.ai-message-bot p {
-  background: #f3f4f6;
-  color: #111827;
-  border-radius: 0.25rem 1rem 1rem 1rem;
-}
-
 /* ← fix list styling inside bot messages */
-.ai-message-bot ul,
-.ai-message-bot ol {
+.ai-bubble-bot ul,
+.ai-bubble-bot ol {
   margin: 0.4rem 0;
   padding-left: 1.25rem;
 }
 
-.ai-message-bot li {
+.ai-bubble-bot li {
   margin-bottom: 0.3rem;
   font-size: 0.88rem;
   line-height: 1.6;
 }
 
-.ai-message-bot strong {
+.ai-bubble-bot strong {
   font-weight: 600;
   color: #111827;
 }
 
-.ai-message-bot a {
+.ai-bubble-bot a {
   color: #2563eb;
   text-decoration: underline;
   word-break: break-all;  /* ← long URLs don't overflow */
 }
 
 .ai-message-user {
-  justify-content: flex-end;
+  align-items: flex-end;
   align-self: flex-end;
 }
 
-.ai-message-user p {
+.ai-bubble-user {
   background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   color: white;
   border-radius: 1rem 0.25rem 1rem 1rem;
+}
+
+.ai-feedback-panel {
+  margin-top: 0.5rem;
+  padding-left: 0.15rem;
+  align-self: flex-start;
+}
+
+.ai-feedback-label {
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+  font-size: 0.82rem;
+  color: #4b5563 !important;
+  font-weight: 600;
+}
+
+.ai-feedback-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.ai-feedback-btn,
+.ai-improve-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #1f2937;
+  border-radius: 9999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-feedback-btn:hover,
+.ai-improve-btn:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.ai-feedback-btn-secondary {
+  border-color: #fca5a5;
+}
+
+.ai-improve-btn {
+  margin-top: 0.45rem;
+  border-color: #4f46e5;
+  color: #4f46e5;
 }
 
 .ai-chat-input-group {
