@@ -4,7 +4,7 @@ import { Bot, MessageCircle, Send, X } from "lucide-react";
 import { useChat } from "@/context/ChatContext";
 
 export default function AiAgentWidget() {
-  const { isChatOpen, setIsChatOpen } = useChat(); // ← from context
+  const { isChatOpen, setIsChatOpen } = useChat();
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -94,28 +94,36 @@ export default function AiAgentWidget() {
 
           <div className="ai-chat-messages" ref={messagesContainerRef}>
             {messages.map((msg) => (
-<div key={msg.id} className={`ai-message ai-message-${msg.sender}`}>
-  <ReactMarkdown
-    components={{
-      a: ({ href, children }) => (
-        <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "#2563eb", textDecoration: "underline" }}>
-          {children}
-        </a>
-      ),
-      p: ({ children }) => <p style={{ margin: "0 0 0.5rem 0" }}>{children}</p>,
-      ul: ({ children }) => <ul style={{ margin: "0.5rem 0", paddingLeft: "1.25rem" }}>{children}</ul>,
-      ol: ({ children }) => <ol style={{ margin: "0.5rem 0", paddingLeft: "1.25rem" }}>{children}</ol>,
-      li: ({ children }) => <li style={{ marginBottom: "0.25rem" }}>{children}</li>,
-      strong: ({ children }) => <strong style={{ fontWeight: "600" }}>{children}</strong>,
-    }}
-  >
-    {msg.text}
-  </ReactMarkdown>
-</div>
+              <div key={msg.id} className={`ai-message ai-message-${msg.sender}`}>
+                {msg.sender === "bot" ? (
+                  <ReactMarkdown
+                    components={{
+                      a: ({ href, children }) => (
+                        <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "#2563eb", textDecoration: "underline" }}>
+                          {children}
+                        </a>
+                      ),
+                      p: ({ children }) => <p style={{ margin: "0 0 0.5rem 0" }}>{children}</p>,
+                      ul: ({ children }) => <ul style={{ margin: "0.5rem 0", paddingLeft: "1.25rem" }}>{children}</ul>,
+                      ol: ({ children }) => <ol style={{ margin: "0.5rem 0", paddingLeft: "1.25rem" }}>{children}</ol>,
+                      li: ({ children }) => <li style={{ marginBottom: "0.25rem" }}>{children}</li>,
+                      strong: ({ children }) => <strong style={{ fontWeight: "600" }}>{children}</strong>,
+                    }}
+                  >
+                    {msg.text}
+                  </ReactMarkdown>
+                ) : (
+                  <p>{msg.text}</p>
+                )}
+              </div>
             ))}
+
+            {/* ← updated typing indicator */}
             {loading && (
               <div className="ai-message ai-message-bot">
-                <p>Typing...</p>
+                <p style={{ color: "#9ca3af", fontStyle: "italic", margin: 0 }}>
+                  Generating answer, please wait up to 10 seconds...
+                </p>
               </div>
             )}
           </div>
@@ -138,6 +146,19 @@ export default function AiAgentWidget() {
               <Send size={18} />
             </button>
           </div>
+
+          {/* ← disclaimer */}
+          <p style={{
+            fontSize: "0.72rem",
+            color: "#9ca3af",
+            textAlign: "center",
+            padding: "0.4rem 1rem 0.75rem",
+            margin: 0,
+            lineHeight: 1.5,
+          }}>
+            AI responses may not always be accurate. Please verify important information with official sources.
+          </p>
+
         </div>
       )}
     </div>
