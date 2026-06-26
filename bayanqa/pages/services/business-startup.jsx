@@ -1,6 +1,6 @@
 // business-startup.jsx
 import React, { useState } from 'react';
-
+import Link from 'next/link';
 // ─── Step detail content ───────────────────────────────────────────────────
 const stepDetails = {
   activity: {
@@ -421,6 +421,9 @@ export default function BusinessStartupSetup() {
               </button>
             </aside>
           </div>
+                  <Link href="/" className="sb-back-link">
+          ← Back to Home
+        </Link>
         </div>
       </section>
 
