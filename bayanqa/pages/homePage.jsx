@@ -1,33 +1,35 @@
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight } from "lucide-react";
+import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight, BarChart3 } from "lucide-react";
 import { useChat } from "@/context/ChatContext";
 <<<<<<< Updated upstream
-
-const CitizenInsightsDashboard = dynamic(() => import("@/components/CitizenInsightsDashboard"), {
-  ssr: false,
-});
 
 const featureCards = [
   {
     icon: Bot,
     title: "AI Assistant",
     description:
-      "Ask questions in plain Arabic or English and receive clear, step-by-step guidance tailored to your situation. No jargon, no confusion.",
-  },
-  {
-    icon: Zap,
-    title: "Instant Translation",
-    description:
-      "All guides and chatbot responses are available in both Arabic and English. Toggle languages instantly — no separate searches needed.",
+      "Ask plain-language questions and get quick guidance from the Bayan QA assistant.",
+    cta: "See Assistant",
+    ctaType: "chat",
   },
   {
     icon: ClipboardList,
     title: "Service Guides",
     description:
-      "Easy-to-follow instructions for every government procedure, including required documents, relevant offices, and links to official portals.",
+      "Browse step-by-step guides for the most common government services.",
+    cta: "See Services",
+    ctaType: "scroll",
+  },
+  {
+    icon: BarChart3,
+    title: "Citizen Feedback",
+    description:
+      "View live analytics on what citizens ask about and how satisfied they are.",
+    cta: "See Analytics",
+    ctaType: "link",
+    href: "/citizen-feedback",
   },
 ];
 
@@ -178,9 +180,28 @@ export default function HomePage() {
                   </div>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
+<<<<<<< Updated upstream
                   {card.title === t("Service Guides") && (
                     <a href="#services" className="feature-card-link">
                       {t("See services →")}
+=======
+                  {card.ctaType === "chat" && (
+                    <a href="#" className="feature-card-link" onClick={(event) => {
+                      event.preventDefault();
+                      setIsChatOpen(true);
+                    }}>
+                      {card.cta} →
+                    </a>
+                  )}
+                  {card.ctaType === "scroll" && (
+                    <a href="#services" className="feature-card-link">
+                      {card.cta} →
+                    </a>
+                  )}
+                  {card.ctaType === "link" && (
+                    <a href={card.href} className="feature-card-link">
+                      {card.cta} →
+>>>>>>> Stashed changes
                     </a>
                   )}
                 </article>
@@ -237,8 +258,6 @@ export default function HomePage() {
             })}
           </div>
         </section>
-
-        <CitizenInsightsDashboard />
       </main>
 
       <style jsx>{`
@@ -419,13 +438,22 @@ export default function HomePage() {
         }
 
         .feature-card-link {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
           margin-top: 1rem;
           color: #2563eb;
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.95rem;
           text-decoration: none;
           transition: color 200ms ease;
+          background: transparent;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          line-height: 1;
+          appearance: none;
+          -webkit-appearance: none;
         }
 
         .feature-card-link:hover {
