@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Bot, Zap, ClipboardList, FileText, Car, Briefcase, MessageCircleWarning, IdCard, PiggyBank, Building2, ArrowRight } from "lucide-react";
 import { useChat } from "@/context/ChatContext";
+<<<<<<< Updated upstream
 
 const CitizenInsightsDashboard = dynamic(() => import("@/components/CitizenInsightsDashboard"), {
   ssr: false,
@@ -80,11 +81,45 @@ const quickNavItems = [
     icon: FileText,
   },
 ];
+=======
+import { useLanguage } from "@/context/LanguageContext";
+>>>>>>> Stashed changes
 
 export default function HomePage() {
-  const { setIsChatOpen } = useChat(); // ← inside the component
+  const { setIsChatOpen } = useChat();
+  const { t } = useLanguage();
   const heroImages = ["/hg1.png", "/hg2.png", "/hg3.png", "/hg4.png"];
   const [slideIndex, setSlideIndex] = useState(0);
+
+  // ← moved inside component so t() is in scope
+  const featureCards = [
+    {
+      icon: Bot,
+      title: t("AI Assistant"),
+      description: t("Ask questions in plain Arabic or English and receive clear, step-by-step guidance tailored to your situation. No jargon, no confusion."),
+    },
+    {
+      icon: Zap,
+      title: t("Instant Translation"),
+      description: t("All guides and chatbot responses are available in both Arabic and English. Toggle languages instantly — no separate searches needed."),
+    },
+    {
+      icon: ClipboardList,
+      title: t("Service Guides"),
+      description: t("Easy-to-follow instructions for every government procedure, including required documents, relevant offices, and links to official portals."),
+    },
+  ];
+
+  const quickNavItems = [
+    { title: t("Traffic & Accidents"), description: t("Get help with fines, reports, insurance claims, and accident procedures."), href: "/services/traffic-accidents", icon: Car },
+    { title: t("Business & Startups"), description: t("Register your company, navigate licenses, and launch your new venture with confidence."), href: "/services/business-startup", icon: Briefcase },
+    { title: t("Violations & Reports"), description: t("Report issues, appeal violations, or learn how to handle government complaints properly."), href: "/services/violations-reports", icon: MessageCircleWarning },
+    { title: t("Document Renewals"), description: t("Renew passports, IDs, residency documents, and other essential papers without the guesswork."), href: "/services/document-renewals", icon: IdCard },
+    { title: t("Student Banking"), description: t("Open accounts, access student benefits, and understand banking options for students."), href: "/services/student-banking", icon: PiggyBank },
+    { title: t("AI Virtual Advisor"), description: t("Ask the virtual advisor for tailored guidance across services and procedures."), href: null, icon: Bot },
+    { title: t("Healthcare & Insurance"), description: t("Register for health insurance, find approved providers, and access public healthcare services."), href: "/services/healthcare-insurance", icon: Building2 },
+    { title: t("Wills & Estate Planning"), description: t("Prepare a will, protect your assets, and ensure your bank accounts are properly managed."), href: "/services/wills-estate", icon: FileText },
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,9 +147,9 @@ export default function HomePage() {
           </div>
 
           <div className="hero-copy">
-            <h1>Fast and clear government guidance in Arabic and English</h1>
+            <h1>{t("Fast and clear government guidance in Arabic and English")}</h1>
             <p className="hero-text">
-              Navigate procedures, documents, and public services with confidence using a single platform built for your everyday needs.
+              {t("Navigate procedures, documents, and public services with confidence using a single platform built for your everyday needs.")}
             </p>
             <div className="hero-indicators">
               {heroImages.map((_, index) => (
@@ -131,7 +166,7 @@ export default function HomePage() {
 
         <section className="core-features-section">
           <div className="section-header">
-            <h2>Everything You Need, in One Place</h2>
+            <h2>{t("Everything You Need, in One Place")}</h2>
           </div>
           <div className="feature-grid">
             {featureCards.map((card) => {
@@ -143,9 +178,9 @@ export default function HomePage() {
                   </div>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
-                  {card.title === "Service Guides" && (
+                  {card.title === t("Service Guides") && (
                     <a href="#services" className="feature-card-link">
-                      See services →
+                      {t("See services →")}
                     </a>
                   )}
                 </article>
@@ -156,18 +191,17 @@ export default function HomePage() {
 
         <section className="quick-nav-section section-spacing" id="services">
           <div className="section-header">
-            <span className="section-badge">SERVICES</span>
-            <h2>Find What You Need</h2>
+            <span className="section-badge">{t("SERVICES")}</span>
+            <h2>{t("Find What You Need")}</h2>
           </div>
           <div className="quick-nav-grid">
             {quickNavItems.map((item) => {
               const Icon = item.icon;
 
-              // ← AI Virtual Advisor uses onClick instead of Link
-              if (item.title === "AI Virtual Advisor") {
+              if (item.title === t("AI Virtual Advisor")) {
                 return (
                   <div
-                    key={item.title}
+                    key="ai-virtual-advisor"
                     className="quick-nav-card"
                     onClick={() => setIsChatOpen(true)}
                     aria-label="Open AI Virtual Advisor"
@@ -185,9 +219,8 @@ export default function HomePage() {
                 );
               }
 
-              // ← all other cards stay as Link
               return (
-                <Link key={item.title} href={item.href} legacyBehavior>
+                <Link key={item.href} href={item.href} legacyBehavior>
                   <a className="quick-nav-card group" aria-label={`Open ${item.title}`}>
                     <div className="quick-nav-icon" aria-hidden="true">
                       <Icon size={35} />
