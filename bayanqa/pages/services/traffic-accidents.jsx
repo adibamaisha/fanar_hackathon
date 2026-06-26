@@ -84,41 +84,8 @@ export default function AccidentVehicleProcedures() {
 
       {/* Action Buttons */}
       <div className="avp-actions">
-        <a href="#full-guide" className="avp-btn avp-btn--primary">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M2 4h12M2 8h8M2 12h10"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            />
-          </svg>
-          View Full Guide
-        </a>
-        <a href="#ask-ai" className="avp-btn avp-btn--ghost">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-          >
-            <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-            <path
-              d="M8 5.5v3M8 10.5v.5"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            />
-          </svg>
-          Ask AI About This
-        </a>
+        
+        
       </div>
     </section>
   );

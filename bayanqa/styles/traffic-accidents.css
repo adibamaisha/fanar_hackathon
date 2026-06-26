@@ -207,12 +207,7 @@
   transform: scale(0.97);
 }
 
-/* Primary button */
-.avp-btn--primary {
-  background: #4f46e5;
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
-}
+
 
 .avp-btn--primary:hover {
   background: #4338ca;
