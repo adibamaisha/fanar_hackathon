@@ -35,6 +35,7 @@ function getCategoryColors() {
 
 export default function CitizenInsightsDashboard() {
   const [feedbackData, setFeedbackData] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const loadData = () => {
@@ -51,6 +52,18 @@ export default function CitizenInsightsDashboard() {
       window.removeEventListener(FEEDBACK_UPDATED_EVENT, loadData);
       window.removeEventListener("focus", loadData);
       document.removeEventListener("visibilitychange", loadData);
+    };
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 640px)");
+    const updateIsMobile = () => setIsMobile(mediaQuery.matches);
+
+    updateIsMobile();
+    mediaQuery.addEventListener("change", updateIsMobile);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateIsMobile);
     };
   }, []);
 
@@ -84,49 +97,73 @@ export default function CitizenInsightsDashboard() {
           borderColor: getCategoryColors(),
           borderWidth: 1,
           borderRadius: 8,
-          maxBarThickness: 56,
+          maxBarThickness: isMobile ? 30 : 56,
         },
       ],
     }),
-    [averageRatings]
+    [averageRatings, isMobile]
   );
 
-  const barOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        min: 0,
-        max: 3,
-        ticks: {
-          stepSize: 1,
+  const barOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          min: 0,
+          max: 3,
+          ticks: {
+            stepSize: 1,
+            font: {
+              size: isMobile ? 10 : 12,
+            },
+          },
+          grid: {
+            color: "rgba(148, 163, 184, 0.2)",
+          },
         },
-        grid: {
-          color: "rgba(148, 163, 184, 0.2)",
+        x: {
+          ticks: {
+            maxRotation: isMobile ? 35 : 0,
+            minRotation: isMobile ? 35 : 0,
+            autoSkip: false,
+            font: {
+              size: isMobile ? 10 : 12,
+            },
+          },
+          grid: {
+            display: false,
+          },
         },
       },
-      x: {
-        grid: {
+      plugins: {
+        legend: {
           display: false,
         },
       },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
+    }),
+    [isMobile]
+  );
 
-  const pieOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "bottom",
+  const pieOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            boxWidth: isMobile ? 10 : 14,
+            padding: isMobile ? 10 : 14,
+            font: {
+              size: isMobile ? 10 : 12,
+            },
+          },
+        },
       },
-    },
-  };
+    }),
+    [isMobile]
+  );
 
   return (
     <section className="insights-dashboard" aria-label="Citizen Insights Dashboard">
@@ -217,7 +254,14 @@ export default function CitizenInsightsDashboard() {
         }
 
         .chart-wrap {
-          height: 280px;
+          position: relative;
+          width: 100%;
+          height: clamp(220px, 36vw, 300px);
+        }
+
+        .chart-wrap :global(canvas) {
+          width: 100% !important;
+          height: 100% !important;
         }
 
         .insights-empty {
@@ -232,7 +276,19 @@ export default function CitizenInsightsDashboard() {
           }
 
           .chart-wrap {
-            height: 250px;
+            height: clamp(200px, 52vw, 260px);
+          }
+
+          .insights-dashboard {
+            padding: 1.25rem;
+          }
+
+          .insights-header h2 {
+            font-size: 1.45rem;
+          }
+
+          .insights-note {
+            font-size: 0.82rem;
           }
         }
       `}</style>

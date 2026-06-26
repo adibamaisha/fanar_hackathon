@@ -493,6 +493,16 @@ export default function HomePage() {
           transform: translateX(-4px);
         }
 
+        @media (max-width: 899px) {
+          .feature-card p {
+            display: none;
+          }
+
+          .feature-card {
+            gap: 0.7rem;
+          }
+        }
+
         @media (min-width: 900px) {
           .feature-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
