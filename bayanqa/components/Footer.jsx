@@ -1,23 +1,24 @@
-// footer.jsx
 import React from 'react';
-
-
-const quickLinks = [
-  { label: 'Home',                href: '/' },
-  { label: 'AI Assistant',        href: '/assistant' },
-  { label: 'Government Services', href: '/services' },
-  { label: 'About',               href: '/about' },
-  { label: 'Contact',             href: '/contact' },
-];
-
-const trustedSources = [
-  { label: 'Hukoomi',                   href: 'https://hukoomi.gov.qa' },
-  { label: 'Ministry of Interior',      href: 'https://portal.moi.gov.qa' },
-  { label: 'Ministry of Justice',       href: 'https://www.moj.gov.qa' },
-  { label: 'Ministry of Public Health', href: 'https://www.moph.gov.qa' },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const quickLinks = [
+    { label: t('Home'),                href: '/' },
+    { label: t('AI Assistant'),        href: '/assistant' },
+    { label: t('Government Services'), href: '/services' },
+    { label: t('About'),               href: '/about' },
+    { label: t('Contact'),             href: '/contact' },
+  ];
+
+  const trustedSources = [
+    { label: 'Hukoomi',                   href: 'https://hukoomi.gov.qa' },
+    { label: t('Ministry of Interior'),   href: 'https://portal.moi.gov.qa' },
+    { label: t('Ministry of Justice'),    href: 'https://www.moj.gov.qa' },
+    { label: t('Ministry of Public Health'), href: 'https://www.moph.gov.qa' },
+  ];
+
   return (
     <footer className="qca-footer">
       <div className="qca-footer-inner">
@@ -32,14 +33,13 @@ export default function Footer() {
               bayan QA
             </p>
             <p className="qca-brand-desc">
-              Simplifying access to government services and information for
-              residents and citizens of Qatar.
+              {t("Simplifying access to government services and information for residents and citizens of Qatar.")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <p className="qca-col-title">Quick Links</p>
+            <p className="qca-col-title">{t("Quick Links")}</p>
             <ul className="qca-link-list">
               {quickLinks.map((l) => (
                 <li key={l.label}>
@@ -51,7 +51,7 @@ export default function Footer() {
 
           {/* Trusted Sources */}
           <div>
-            <p className="qca-col-title">Trusted Sources</p>
+            <p className="qca-col-title">{t("Trusted Sources")}</p>
             <ul className="qca-link-list">
               {trustedSources.map((l) => (
                 <li key={l.label}>
@@ -65,13 +65,10 @@ export default function Footer() {
 
           {/* Disclaimer */}
           <div>
-            <p className="qca-col-title">Disclaimer</p>
+            <p className="qca-col-title">{t("Disclaimer")}</p>
             <div className="qca-disclaimer">
               <p>
-                This platform provides <strong>AI-assisted guidance</strong> based
-                on publicly available government information. Always verify
-                important information with the official government authority before
-                taking action.
+                {t("This platform provides AI-assisted guidance based on publicly available government information. Always verify important information with the official government authority before taking action.")}
               </p>
             </div>
           </div>
@@ -81,11 +78,11 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className="qca-footer-bottom">
           <p className="qca-copyright">
-            © 2026 <span>bayan QA</span>. All rights reserved.
+            © 2026 <span>bayan QA</span>. {t("All rights reserved.")}
           </p>
           <div className="qca-badges">
-            <span className="qca-badge">AI Powered</span>
-            <span className="qca-badge">Gov Verified</span>
+            <span className="qca-badge">{t("AI Powered")}</span>
+            <span className="qca-badge">{t("Gov Verified")}</span>
           </div>
         </div>
 
