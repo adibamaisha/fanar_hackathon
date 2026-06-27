@@ -36,6 +36,9 @@ function getCategoryColors() {
 export default function CitizenInsightsDashboard() {
   const [feedbackData, setFeedbackData] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [aiSummary, setAiSummary] = useState("");
+  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
+  const [summaryError, setSummaryError] = useState("");
 
   useEffect(() => {
     const loadData = () => {
@@ -69,6 +72,56 @@ export default function CitizenInsightsDashboard() {
 
   const serviceCounts = useMemo(() => getServiceCounts(feedbackData), [feedbackData]);
   const averageRatings = useMemo(() => getAverageRatings(feedbackData), [feedbackData]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadAiSummary = async () => {
+      if (feedbackData.length === 0) {
+        setAiSummary("");
+        setSummaryError("");
+        return;
+      }
+
+      setIsGeneratingSummary(true);
+      setSummaryError("");
+
+      try {
+        const response = await fetch("/api/analytics", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            totalFeedback: feedbackData.length,
+            serviceCounts,
+            averageRatings,
+            feedbackSamples: feedbackData.slice(-10),
+          }),
+          signal: controller.signal,
+        });
+
+        const data = await response.json();
+
+        if (!controller.signal.aborted) {
+          setAiSummary(data.summary || "");
+          setSummaryError(data.error ? "AI summary generated with fallback data." : "");
+        }
+      } catch {
+        if (!controller.signal.aborted) {
+          setSummaryError("Unable to generate AI summary right now.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsGeneratingSummary(false);
+        }
+      }
+    };
+
+    loadAiSummary();
+
+    return () => controller.abort();
+  }, [feedbackData, serviceCounts, averageRatings]);
 
   const pieData = useMemo(
     () => ({
@@ -175,6 +228,17 @@ export default function CitizenInsightsDashboard() {
         </p>
       </div>
 
+      <article className="insights-ai-card">
+        <div className="insights-ai-head">
+          <h3>AI Insights</h3>
+          {isGeneratingSummary && <span className="insights-ai-status">Generating...</span>}
+        </div>
+        <p className="insights-ai-copy">
+          {aiSummary || "The AI summary will appear here once feedback is available."}
+        </p>
+        {summaryError && <p className="insights-ai-error">{summaryError}</p>}
+      </article>
+
       <div className="insights-grid">
         <article className="insights-card">
           <h3>Service Demand</h3>
@@ -235,6 +299,49 @@ export default function CitizenInsightsDashboard() {
           gap: 1rem;
         }
 
+        .insights-ai-card {
+          margin-top: 1rem;
+          padding: 1rem 1.1rem;
+          border: 1px solid #dbeafe;
+          border-radius: 1rem;
+          background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+        }
+
+        .insights-ai-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          margin-bottom: 0.65rem;
+        }
+
+        .insights-ai-head h3 {
+          margin: 0;
+          font-size: 1rem;
+        }
+
+        .insights-ai-status {
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #2563eb;
+          background: rgba(37, 99, 235, 0.12);
+          padding: 0.3rem 0.55rem;
+          border-radius: 999px;
+        }
+
+        .insights-ai-copy {
+          margin: 0;
+          color: #1f2937;
+          line-height: 1.7;
+          white-space: pre-line;
+        }
+
+        .insights-ai-error {
+          margin: 0.6rem 0 0;
+          color: #6b7280;
+          font-size: 0.88rem;
+        }
+
         .insights-card {
           border: 1px solid #e5e7eb;
           border-radius: 1rem;
@@ -271,6 +378,11 @@ export default function CitizenInsightsDashboard() {
         }
 
         @media (max-width: 900px) {
+          .insights-ai-head {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
           .insights-grid {
             grid-template-columns: 1fr;
           }
