@@ -35,6 +35,7 @@ export const UI_STRINGS = {
 
 // Feature cards
 "Everything You Need, in One Place": true,
+"Everything You Need in One Place": true,
 "AI Assistant": true,
 "Ask questions in plain Arabic or English and receive clear, step-by-step guidance tailored to your situation. No jargon, no confusion.": true,
 "Service Guides": true,
