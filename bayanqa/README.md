@@ -1,40 +1,214 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Bayan QA
 
-## Getting Started
+Bayan QA is a bilingual (English and Arabic) government-services assistant for Qatar.
 
-First, run the development server:
+It combines:
+
+- AI chat guidance for citizen questions
+- Service navigation pages for common procedures
+- User feedback capture
+- Live analytics dashboard for service demand and satisfaction trends
+
+The app is built with Next.js (Pages Router), React, Chart.js, and a Fanar LLM backend integration.
+
+## 1. Platform Summary
+
+### Core capabilities
+
+- AI assistant widget with step-by-step responses
+- Arabic translation mode for UI content
+- Quick service navigation cards
+- Citizen feedback collection (chat and survey)
+- Analytics dashboard with service demand and satisfaction charts
+
+### Main routes
+
+- Home page: /
+- Main landing page: /homePage
+- Feedback page: /feedback
+- Citizen analytics page: /citizen-feedback
+- Service pages: /services/*
+
+## 2. Tech Stack
+
+- Next.js 16 (Pages Router)
+- React 19
+- Chart.js + react-chartjs-2
+- Lucide icons
+- React Markdown (for assistant message rendering)
+
+## 3. Project Initialization and Setup
+
+### Prerequisites
+
+- Node.js 18+ (Node 20+ recommended)
+- npm 9+
+
+### Step 1: Install dependencies
+
+Run from the project root:
+
+```bash
+npm install
+```
+
+### Step 2: Create environment file
+
+Create a file named .env.local in the project root.
+
+Add:
+
+```env
+FANAR_API_KEY=your_fanar_api_key_here
+```
+
+This key is required by:
+
+- pages/api/chat.js
+- pages/api/translate.js
+
+### Step 3: Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- http://localhost:3000
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Step 4: Production build check
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 4. Available Scripts
 
-## Learn More
+- npm run dev: start local development server
+- npm run build: create optimized production build
+- npm run start: start production server
 
-To learn more about Next.js, take a look at the following resources:
+## 5. Workflow Overview
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### A) Assistant workflow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. User opens AI widget and sends a message.
+2. Frontend posts conversation to /api/chat.
+3. API sends prompt + user messages to Fanar model.
+4. Reply is rendered in chat (Markdown supported).
+5. User can mark response helpful/not helpful.
+6. Feedback is saved locally and posted to /api/feedback.
 
-## Deploy on Vercel
+### B) Translation workflow
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. User switches language to Arabic.
+2. LanguageContext gathers UI strings from UI_STRINGS.
+3. Strings are batched and sent to /api/translate.
+4. API requests numbered translations from Fanar model.
+5. Translations are cached in memory and UI rerenders in Arabic.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### C) Analytics workflow
+
+1. Feedback events are saved in localStorage (client source of truth).
+2. Feedback is also posted to data files through /api/feedback:
+	- data/survey-feedback.json
+	- data/chat-feedback.json
+3. CitizenInsightsDashboard reads feedback and computes:
+	- service demand counts
+	- average satisfaction ratings
+4. Charts update live when feedback changes.
+
+## 6. Architecture Notes
+
+### Global app shell
+
+pages/_app.js wraps all pages with:
+
+- LanguageProvider
+- ChatProvider
+- Navbar
+- AiAgentWidget
+- Footer
+
+### Key modules
+
+- context/LanguageContext.js: i18n state and translation orchestration
+- context/ChatContext.jsx: assistant open/close state
+- components/AiAgentWidget.jsx: chat UI and feedback actions
+- components/CitizenInsightsDashboard.jsx: analytics charts
+- utils/feedback.js: feedback normalization, storage, and aggregations
+
+### API routes
+
+- pages/api/chat.js: AI responses
+- pages/api/translate.js: UI translation batching
+- pages/api/feedback.js: feedback persistence and reset
+
+## 7. Data and Persistence
+
+### Client-side
+
+- Survey feedback key: bayan_feedback_data
+- Chat feedback key: bayan_chat_feedback
+
+### Server-side files
+
+- data/survey-feedback.json
+- data/chat-feedback.json
+
+If API persistence fails, the app still functions using localStorage.
+
+## 8. Reset Feedback Data
+
+The frontend utility resetFeedbackData triggers:
+
+- localStorage cleanup
+- DELETE /api/feedback to reset JSON files
+
+You can also call this endpoint manually during development.
+
+## 9. Folder Guide
+
+- components/: reusable UI blocks
+- context/: global state providers
+- pages/: routes and API endpoints
+- pages/services/: service-specific pages
+- styles/: global and component style sheets
+- utils/: shared utility logic
+- data/: persisted feedback records
+- public/: static assets
+
+## 10. Deployment Notes
+
+- Set FANAR_API_KEY in the deployment environment.
+- Ensure the runtime has write permissions to the data directory if using file persistence in production.
+- For serverless deployments, consider replacing file persistence with a database.
+
+## 11. Troubleshooting
+
+### Missing AI responses
+
+- Verify FANAR_API_KEY in .env.local.
+- Check API route errors in server logs.
+
+### Translation not applying to specific text
+
+- Confirm exact text key exists in UI_STRINGS.
+- Translation keys are exact-match, including punctuation.
+
+### Chart/data mismatch
+
+- Confirm feedback exists in localStorage.
+- Confirm data files are writable if relying on API persistence.
+
+## 12. Team Workflow Suggestion
+
+Use this lightweight flow for contributors:
+
+1. Pull latest changes and install deps.
+2. Run npm run dev and validate core pages.
+3. Implement feature in small commits.
+4. Run npm run build before pushing.
+5. Update this README when behavior or setup changes.
