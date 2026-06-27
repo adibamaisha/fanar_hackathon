@@ -3,6 +3,8 @@
 
 Bayan QA is a bilingual (English and Arabic) government-services assistant for Qatar.
 
+Fanar API is used in three places: `pages/api/chat.js` for AI assistant replies, `pages/api/translate.js` for Arabic UI translation, and `pages/api/analytics.js` for AI-generated dashboard insights. All three routes use the Fanar model `Fanar-C-2-27B`.
+
 It combines:
 
 - AI chat guidance for citizen questions
@@ -67,6 +69,7 @@ This key is required by:
 
 - pages/api/chat.js
 - pages/api/translate.js
+- pages/api/analytics.js
 
 ### Step 3: Run locally
 
@@ -119,7 +122,9 @@ npm run start
 3. CitizenInsightsDashboard reads feedback and computes:
 	- service demand counts
 	- average satisfaction ratings
-4. Charts update live when feedback changes.
+4. CitizenInsightsDashboard sends the aggregated stats to /api/analytics.
+5. The analytics route uses Fanar to generate a short AI insight summary.
+6. Charts and the AI summary update live when feedback changes.
 
 ## 6. Architecture Notes
 
@@ -145,6 +150,7 @@ pages/_app.js wraps all pages with:
 
 - pages/api/chat.js: AI responses
 - pages/api/translate.js: UI translation batching
+- pages/api/analytics.js: AI-generated dashboard insights
 - pages/api/feedback.js: feedback persistence and reset
 
 ## 7. Data and Persistence
