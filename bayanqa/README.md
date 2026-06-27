@@ -2,6 +2,8 @@
 
 Bayan QA is a bilingual (English and Arabic) government-services assistant for Qatar.
 
+Fanar API is used in two places: `pages/api/chat.js` for AI assistant replies and `pages/api/translate.js` for Arabic UI translation. Both routes use the Fanar model `Fanar-C-2-27B`.
+
 It combines:
 
 - AI chat guidance for citizen questions
